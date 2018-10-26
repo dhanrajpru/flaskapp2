@@ -1,5 +1,5 @@
 pipeline {
- agent { label "build" }
+ agent { label "uitest" }
   stages {
     stage("checkout"){
       steps {
@@ -9,19 +9,21 @@ pipeline {
 
   stage("build docker images"){
     steps {
-        sh "docker build -t flaskapp ."
+        sh "sudo docker build -t flaskapp ."
     }  
   }   
-
+  
   stage ("Docker deploy"){
     steps {
-       sh "docker run -d -p 5000:5000 flaskapp"
+       sh "sudo docker stop flask" 
+       sh "sudo docker rm flask" 
+       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp"
    }   
   }
 
-   stage("launch inf0"){
+   stage("launch info"){
      steps {
-          echo "http://${ip}"
+          echo "$FLASK_DEMO_URL"
         }
       }
   }
