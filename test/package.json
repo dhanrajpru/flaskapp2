@@ -1,0 +1,19 @@
+{
+  "name": "testinfra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "protractor conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine-allure-reporter": "^1.0.2",
+    "protractor": "^5.4.1",
+    "dotenv": "^6.0.0"
+  }
+}
