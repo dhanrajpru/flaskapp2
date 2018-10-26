@@ -1,5 +1,5 @@
 exports.config = {
-  seleniumAddress: "http://selenium-hub/wd/hub",
+  seleniumAddress: "http:10.0.0.221:4444/wd/hub",
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
