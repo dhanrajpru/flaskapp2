@@ -21,7 +21,7 @@ pipeline {
 
    stage("launch inf0"){
      steps {
-          echo "http://${ip}:5000"
+          echo "http://${ip}"
         }
       }
   }
