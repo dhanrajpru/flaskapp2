@@ -8,7 +8,7 @@ ${url}  %{FLASK_DEMO_URL}
 *** Test Cases ***
 Flaskapp testing
     Create Session  getjson  ${url}
-    ${result}  Get Request  getjson   json
+    ${result}  Get Request  getjson   /json
     ${json1}=  Set Variable  ${result.json()}
 
     ${keys}  Get Dictionary Keys  ${json1}
