@@ -36,7 +36,7 @@ pipeline {
               sh "sudo docker build -t protractor ."
               sh "sudo docker rm -f protractor"
               sh "sudo rm -rf ./test/conf/allure-results/*.xml"
-              sh "sudo docker run -v /home/ubuntu/workspace/sandbox/DevOpsDemo/test/test/conf/allure-results:/test/conf/allure-results -e ETH_APP_URL=$FLASK_DEMO_URL --name protractor protractor"
+              sh "sudo docker run -v /home/ubuntu/workspace/sandbox/DevOpsDemo/test/test/conf/allure-results:/test/conf/allure-results -e FLASK_DEMO_URL=$FLASK_DEMO_URL --name protractor protractor"
           }
         }
       }  
