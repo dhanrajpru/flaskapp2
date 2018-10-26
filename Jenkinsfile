@@ -32,6 +32,8 @@ pipeline {
    stage("Robot testing"){
      steps {
        dir ("./robottesting"){
+           sh "sudo docker stop robot"
+           sh "sudo docker rm robot"
            sh "sudo docker build -t robot ."
            sh "docker run -d --name robot robot"
            }
