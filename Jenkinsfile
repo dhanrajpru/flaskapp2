@@ -1,5 +1,5 @@
 pipeline {
- agent { label "suku-test" }
+ agent { label "build" }
   stages {
     stage("checkout"){
       steps {
@@ -22,7 +22,7 @@ pipeline {
 
    stage("launch info"){
      steps {
-          echo "http://${ip}:5000"
+          echo "http://${ip}"
         }
       }
   }
