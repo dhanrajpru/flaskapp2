@@ -23,7 +23,7 @@ pipeline {
 
    stage("launch info"){
      steps {
-          echo "$FLASK_DEMO_URL"
+          echo "http://${ip}"
         }
       }
    stage("Protractor testing"){
