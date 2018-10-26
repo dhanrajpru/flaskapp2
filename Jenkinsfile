@@ -54,8 +54,8 @@ pipeline {
    stage("Tag and push") {
             steps {
                 withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6',url:'') {
-                    sh "sudo docker tag flaskapp/comorin:ci_latest"
-                    sh "sudo docker push flaskapp/comorin:ci_latest"
+                    sh "sudo docker tag flaskapp/comorin:ci_latest comorincs/flaskapp/comorin:ci_latest"
+                    sh "sudo docker push comorincs/flaskapp/comorin:ci_latest"
                     
 
                 }
