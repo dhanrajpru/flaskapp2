@@ -12,7 +12,7 @@ pipeline {
 
   stage("build docker images"){
     steps {
-        sh "sudo docker build -t flaskapp/comorin:ci_latest ."
+        sh "sudo docker build -t comorincs/flaskapp ."
     }  
   }   
   
@@ -20,7 +20,7 @@ pipeline {
     steps {
        sh "sudo docker stop flask" 
        sh "sudo docker rm flask" 
-       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp/comorin:ci_latest"
+       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask comorincs/flaskapp"
    }   
   }
 
@@ -52,8 +52,8 @@ pipeline {
    stage("Tag and push") {
             steps {
                 withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6') {
-                    sh "docker tag flaskapp/comorin:ci_latest
-                    sh "docker push flaskapp/comorin:ci_latest
+                    sh "docker tag comorincs/flaskapp/comorincs/flaskapp"
+                    sh "docker push comorincs/comorincs/flaskapp" 
                     
 
                 }
