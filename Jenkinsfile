@@ -1,5 +1,5 @@
 pipeline {
- agent { label "suku-test" }
+ agent { label "build" }
   stages {
     stage("checkout"){
       steps {
