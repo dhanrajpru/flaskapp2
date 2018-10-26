@@ -29,6 +29,15 @@ pipeline {
           echo "http://${ip}"
         }
       }
+   stage("Robot testing"){
+     steps {
+       dir ("./robottesting"){
+           sh "sudo docker build -t robot ."
+           sh "docker run -d --name robot robot"
+           }
+        }
+    }
+
    stage("Protractor testing"){
         steps {
           dir ("./test") {
