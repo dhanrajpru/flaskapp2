@@ -12,7 +12,7 @@ pipeline {
 
   stage("build docker images"){
     steps {
-        sh "sudo docker build -t flaskapp/comorin:ci_latest ."
+        sh "docker build -t flaskapp/comorin:ci_latest ."
     }  
   }   
   
