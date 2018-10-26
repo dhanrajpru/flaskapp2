@@ -15,8 +15,8 @@ pipeline {
   
   stage ("Docker deploy"){
     steps {
-       sh "sudo docker stop flask" 
-       sh "sudo docker rm flask" 
+       //sh "sudo docker stop flask" 
+       //sh "sudo docker rm flask" 
        sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp"
    }   
   }
