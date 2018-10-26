@@ -1,5 +1,5 @@
 exports.config = {
-  seleniumAddress: "http://grid/wd/hub",
+  seleniumAddress: "http://selenium-hub/wd/hub",
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
