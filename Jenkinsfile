@@ -53,7 +53,7 @@ pipeline {
       }
    stage("Tag and push") {
             steps {
-                withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6') {
+                withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6', url: '') {
                     sh "docker tag comorincs/flaskapp/comorincs/flaskapp"
                     sh "docker push comorincs/comorincs/flaskapp" 
                     
