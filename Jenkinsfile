@@ -12,14 +12,15 @@ pipeline {
         sh "docker build -t flaskapp ."
     }  
   }   
-
+  
   stage ("Docker deploy"){
     steps {
-       sh "docker run -d -p 5000:5000 flaskapp"
+       sh "docker stop flask" 
+       sh "docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp"
    }   
   }
 
-   stage("launch inf0"){
+   stage("launch info"){
      steps {
           echo "http://${ip}:5000"
         }
