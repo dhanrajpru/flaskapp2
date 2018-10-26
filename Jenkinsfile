@@ -12,25 +12,15 @@ pipeline {
 
   stage("build docker images"){
     steps {
-<<<<<<< HEAD
         sh "sudo docker build -t comorincs/flaskapp ."
-=======
-        sh "docker build -t flaskapp/comorin:ci_latest ."
->>>>>>> 156d6ff28f1498dfe2210d33cf15e20d0565eee6
     }  
   }   
   
   stage ("Docker deploy"){
     steps {
-<<<<<<< HEAD
        sh "sudo docker stop flask" 
        sh "sudo docker rm flask" 
        sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask comorincs/flaskapp"
-=======
-       sh "docker stop flask" 
-       sh "docker rm flask" 
-       sh "docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp/comorin:ci_latest"
->>>>>>> 156d6ff28f1498dfe2210d33cf15e20d0565eee6
    }   
   }
 
@@ -63,15 +53,9 @@ pipeline {
       }
    stage("Tag and push") {
             steps {
-<<<<<<< HEAD
                 withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6') {
                     sh "docker tag comorincs/flaskapp/comorincs/flaskapp"
                     sh "docker push comorincs/comorincs/flaskapp" 
-=======
-                withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6',url:'') {
-                    sh "docker tag flaskapp/comorin:ci_latest comorincs/flaskapp/comorin:ci_latest"
-                    sh "docker push comorincs/flaskapp/comorin:ci_latest"
->>>>>>> 156d6ff28f1498dfe2210d33cf15e20d0565eee6
                     
 
                 }
