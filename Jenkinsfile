@@ -1,5 +1,8 @@
 pipeline {
  agent { label "build" }
+  environment {
+        def ip = sh returnStdout: true, script: 'curl -s http://169.254.169.254/latest/meta-data/public-ipv4'
+ }
   stages {
     stage("checkout"){
       steps {
@@ -15,8 +18,8 @@ pipeline {
   
   stage ("Docker deploy"){
     steps {
-       //sh "sudo docker stop flask" 
-       //sh "sudo docker rm flask" 
+       sh "sudo docker stop flask" 
+       sh "sudo docker rm flask" 
        sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp"
    }   
   }
