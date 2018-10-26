@@ -18,9 +18,9 @@ pipeline {
   
   stage ("Docker deploy"){
     steps {
-       sh "sudo docker stop flask" 
-       sh "sudo docker rm flask" 
-       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp/comorin:ci_latest"
+       sh "docker stop flask" 
+       sh "docker rm flask" 
+       sh "docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp/comorin:ci_latest"
    }   
   }
 
@@ -32,9 +32,9 @@ pipeline {
    stage("Robot testing"){
      steps {
        dir ("./robottesting"){
-           sh "sudo docker stop robot"
-           sh "sudo docker rm robot"
-           sh "sudo docker build -t robot ."
+           sh "docker stop robot"
+           sh "docker rm robot"
+           sh "docker build -t robot ."
            sh "docker run -d --name robot robot"
            }
         }
@@ -43,19 +43,19 @@ pipeline {
    stage("Protractor testing"){
         steps {
           dir ("./test") {
-              sh "sudo docker-compose up -d"
-              sh "sudo docker build -t protractor ."
-              sh "sudo docker rm -f protractor"
-              sh "sudo rm -rf ./test/conf/allure-results/*.xml"
-              sh "sudo docker run -v /home/ubuntu/workspace/sandbox/DevOpsDemo/test/test/conf/allure-results:/test/conf/allure-results -e FLASK_DEMO_URL=$FLASK_DEMO_URL --name protractor protractor"
+              sh "docker-compose up -d"
+              sh "docker build -t protractor ."
+              sh "docker rm -f protractor"
+              sh "rm -rf ./test/conf/allure-results/*.xml"
+              sh "docker run -v /home/ubuntu/workspace/sandbox/DevOpsDemo/test/test/conf/allure-results:/test/conf/allure-results -e FLASK_DEMO_URL=$FLASK_DEMO_URL --name protractor protractor"
           }
         }
       }
    stage("Tag and push") {
             steps {
                 withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6',url:'') {
-                    sh "sudo docker tag flaskapp/comorin:ci_latest comorincs/flaskapp/comorin:ci_latest"
-                    sh "sudo docker push comorincs/flaskapp/comorin:ci_latest"
+                    sh "docker tag flaskapp/comorin:ci_latest comorincs/flaskapp/comorin:ci_latest"
+                    sh "docker push comorincs/flaskapp/comorin:ci_latest"
                     
 
                 }
