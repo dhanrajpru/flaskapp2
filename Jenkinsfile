@@ -12,7 +12,7 @@ pipeline {
 
   stage("build docker images"){
     steps {
-        sh "sudo docker build -t flaskapp ."
+        sh "sudo docker build -t flaskapp/comorin:ci_latest ."
     }  
   }   
   
@@ -20,7 +20,7 @@ pipeline {
     steps {
        sh "sudo docker stop flask" 
        sh "sudo docker rm flask" 
-       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp"
+       sh "sudo docker run -d -p 5000:5000 -e $FLASK_DEMO_URL --name flask flaskapp/comorin:ci_latest"
    }   
   }
 
@@ -48,7 +48,17 @@ pipeline {
               sh "sudo docker run -v /home/ubuntu/workspace/sandbox/DevOpsDemo/test/test/conf/allure-results:/test/conf/allure-results -e FLASK_DEMO_URL=$FLASK_DEMO_URL --name protractor protractor"
           }
         }
-      }  
+      }
+   stage("Tag and push") {
+            steps {
+                withDockerRegistry(credentialsId: '2f25b61e-5aa0-4b38-891c-5653c22035d6') {
+                    sh "docker tag flaskapp/comorin:ci_latest
+                    sh "docker push flaskapp/comorin:ci_latest
+                    
+
+                }
+            }
+        }     
     }
  post {
    always {
